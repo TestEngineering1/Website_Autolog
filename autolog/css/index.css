@@ -1,0 +1,72 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-header {
+    display: inline-flex;
+    width: 100%;
+}
+
+.navbar-header .brand {
+    min-width: 60%;
+    max-width: 60%;
+    
+    width: 60%;
+}
+
+.navbar-text {
+    font-size: 300%;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content .input-group, .main-content .btn-group {
+    width: 94%;
+}
+
+.main-content .input-group {
+    margin: 5px;
+}
+
+.main-content .btn-group {
+    margin: 15px;
+}
+
+.input-group-addon {
+    min-width: 6ch;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    background-color: #282a2b;
+    
+    width: 100%;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-around;
+    
+    width: 100%;
+}
+
+.footer .text-muted {
+    color: #8C8989;
+    margin: 10px;
+}
+
+.footer .dl-link {
+    color: #BFBFBF;
+}
+
+@media (max-width: 360px) {
+    .navbar-header .brand {
+        display: none;
+    }
+}
