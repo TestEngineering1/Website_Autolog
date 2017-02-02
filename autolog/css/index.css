@@ -4,15 +4,12 @@ body {
 }
 
 .navbar-header {
-    display: inline-flex;
+    display: flex;
     width: 100%;
 }
 
 .navbar-header .brand {
-    min-width: 60%;
     max-width: 60%;
-    
-    width: 60%;
 }
 
 .navbar-text {
