@@ -1,0 +1,102 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+}
+
+.navbar-header {
+  width: 100%;
+}
+
+.navbar-header .brand {
+  max-width: 80%;
+}
+
+.navbar-text {
+  font-size: 400%;
+}
+
+.main-content-form .input-group, .main-content-form .btn-group {
+  width: 94%;
+}
+
+.main-content-form .input-group {
+  margin: 5px;
+}
+
+.main-content-form .btn-group {
+  margin: 15px;
+}
+
+.input-group-addon {
+  min-width: 6ch;
+}
+
+.response .glyphicon {
+	font-size: 8rem;
+	padding: 0.5rem;
+}
+
+.response .glyphicon-thumbs-up {
+	color: green
+}
+
+.response .glyphicon-thumbs-down {
+	color: red;
+}
+
+.response-success, .response-error {
+	text-align: center;
+}
+
+.response-success, .response-error {
+	font-size: 3rem;
+}
+
+.response-success-details, .response-error-details {
+	font-size: 2.5rem;
+	color: #777;
+}
+
+.footer {
+  background-color: #282a2b;
+  width: 100%;
+}
+
+.footer .container {
+	text-align: center;
+  width: 100%;
+}
+
+.footer .text-muted {
+  color: #8C8989;
+  margin: 10px;
+}
+
+.footer .dl-link {
+  color: #BFBFBF;
+}
+
+@media (max-width: 360px) {
+  .navbar-header .brand {
+    display: none;
+  }
+
+	.navbar-text {
+    font-size: 350%;
+	}
+}
+
+@media (max-width: 230px) {
+	.navbar-text {
+		font-size: 250%;
+	}
+}
+
+@media (max-width: 200px) {
+	.navbar-text {
+    font-size: 200%;
+	}
+}

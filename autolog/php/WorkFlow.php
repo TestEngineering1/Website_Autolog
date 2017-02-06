@@ -43,57 +43,71 @@
 
 		// Flow start
 		function start() {
-			$pdo = PDOHandler::getPDOInstance();
+			try {
+				$pdo = PDOHandler::getPDOInstance();
 
-			if($this->checkOpid($pdo)) {
-				echo '1-';
+				$status = 'fail';
+				$message = 'Problemas durante a requisição';
+				$details = 'Verifique se as informações escaneadas estão corretas e tente novamente!';
 
-				if($this->getSerialSteps($pdo)) {
-					echo '2-';
-
-					$handleEtapaAtual = $this->kSgqdProximaEtapa['HANDLEETAPAATUAL'];
-
-					if($handleEtapaAtual == $this->allowedStation) {
-						echo '3-';
-
+				if($this->checkOpid($pdo)) {
+					if($this->getSerialSteps($pdo)) {
 						if($this->getStepName($pdo)) {
-							echo '4-';
+							$handleEtapaAtual = $this->kSgqdProximaEtapa['HANDLEETAPAATUAL'];
 
-							if($this->insertTestTable($pdo)) {
-								echo '5-';
+							if($handleEtapaAtual == $this->allowedStation) {
+								if($this->insertTestTable($pdo)) {
+									if($this->insertHistoricTable($pdo)) {
+										if($this->updateNextStepTable($pdo)) {
+											if($this->getSerialSteps($pdo) && $this->getStepName($pdo)) {
+												$status = 'success';
+												$message = 'Produto logado no sistema!';
+												$details = 'Próximo posto: ' . $this->kSgqdEtapas['NOME'];
 
-								if($this->insertHistoricTable($pdo)) {
-									echo '6-';
-
-									if($this->updateNextStepTable($pdo)) {
-
+												$this->jsonResponse($status, $message, $details);
+											} else {
+												return $this->jsonResponse($status, $message, $details);
+											}
+										} else {
+											return $this->jsonResponse($status, $message, $details);
+										}
 									} else {
-
+										return $this->jsonResponse($status, $message, $details);
 									}
 								} else {
-									echo '(6)-';
-									// TODO MANIPULACAO DB
+									return $this->jsonResponse($status, $message, $details);
 								}
 							} else {
-								echo '(5)-';
-								// TODO MANIPULACAO DB
+								$message = 'Número de série inválido ou não está na rota correta';
+								$details = 'Próximo posto: ' . $this->kSgqdEtapas['NOME'];
+
+								return $this->jsonResponse($status, $message, $details);
 							}
 						} else {
-							echo '(4)-';
-							// TODO MANIPULACAO DB
+							return $this->jsonResponse($status, $message, $details);
 						}
 					} else {
-						echo '(3)-';
-						// TODO FORA DE ROTA
+						return $this->jsonResponse($status, $message, $details);
 					}
 				} else {
-					echo '(2)-';
-					// TODO MANIPULACAO DB
+					$details = 'O código do operador é inválido!';
+
+					return $this->jsonResponse($status, $message, $details);
 				}
-			} else {
-				echo '(1)-';
-				// TODO OPID
+			} catch(PDOException $e) {
+				return $this->jsonResponse($status, $message, $details);
 			}
+		}
+
+		// Return response to web page
+		function jsonResponse($status, $message, $details) {
+			$jsonData = array(
+				'status' => $status,
+				'message' => $message,
+				'details' => $details
+			);
+
+			echo json_encode($jsonData);
 		}
 
 		// Insert or update the given values in the table
@@ -109,7 +123,17 @@
 
 		// Select the first row returned by a query
 		function selectRow($pdo, $query, $queryData) {
-			return $this->select($pdo, $query, $queryData)[0];
+			$rows = $this->select($pdo, $query, $queryData);
+
+			if(sizeof($rows) > 0) {
+				$row = $rows[0];
+
+				if(isset($row)) {
+					return $row;
+				}
+			}
+
+			return null;
 		}
 
 		// Select all rows returned by a query
@@ -138,8 +162,11 @@
 						return $stmt;
 					}
 				} catch(PDOException $e) {
-					echo $e->getMessage();
-					// TODO Manipulacao DB
+					/*$status = 'fail';
+					$message = 'Problemas durante a requisição';
+					$details = 'Verifique se as informações escaneadas estão corretas e tente novamente';
+
+					$this->jsonResponse($status, $message, $details);*/
 				}
 
 				return null;

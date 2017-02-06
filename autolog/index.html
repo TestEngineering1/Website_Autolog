@@ -5,7 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/position.css">
 	</head>
 	<body>
 		<header>
@@ -21,37 +22,44 @@
 			</nav>
 		</header>
 
-		<main class="col-md-12">
-			<form class="main-content" action="../autolog/php/WorkFlow.php" method="post">
+		<main class="col-md-12 main-content">
+			<form id="main-content-form" class="main-content-form" method="POST">
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon" id="sizing-addon1">SN</span>
-					<input type="text" class="form-control" name="serial" placeholder="Número de Série" aria-describedby="sizing-addon1" value="34200949602404">
+					<input id="numeroSerie" type="text" class="form-control" name="serial" placeholder="Número de Série" aria-describedby="sizing-addon1" value="34200949602404">
 					<!-- 12341233199999 -->
 				</div>
 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon" id="sizing-addon1">ID</span>
-					<input type="text" class="form-control" name="opid" placeholder="Código do Operador" aria-describedby="sizing-addon1" value="1821">
+					<input id="handleUsuario" type="text" class="form-control" name="opid" placeholder="Código do Operador" aria-describedby="sizing-addon1" value="1821">
 				</div>
 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon" id="sizing-addon1">LN</span>
-					<input type="text" class="form-control" name="line" placeholder="Linha" aria-describedby="sizing-addon1" autofocus>
+					<input id="handleLinha" type="text" class="form-control" name="line" placeholder="Linha" aria-describedby="sizing-addon1" autofocus>
 				</div>
-
-				<!--
-				<div class="input-group input-group-lg">
-					<span class="input-group-addon" id="sizing-addon1">PT</span>
-					<input type="text" class="form-control" name="station" placeholder="Posto de trabalho" aria-describedby="sizing-addon1">
-				</div>
-				-->
 
 				<div class="btn-group btn-group-justified" role="group" aria-label="...">
 					<div class="btn-group" role="group">
-						<button type="submit" class="btn btn-default">Confirmar</button>
+						<button id="submitBt" class="btn btn-default" type="submit">Confirmar</button>
 					</div>
 				</div>
 			</form>
+
+			<div id="response" class="container response">
+				<div id="response-success" class="response-success">
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+					<p id="response-success-message" class="response-success-message">SUCESSO</p>
+					<p id="response-success-details" class="response-success-details">SUCESSO DETALHES</p>
+				</div>
+
+				<div id="response-error" class="response-error">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+					<p id="response-error-message" class="response-error-message">FALHA</p>
+					<p id="response-error-details" class="response-error-details">FALHA DETALHES</p>
+				</div>
+			</div>
 		</main>
 
 		<footer class="footer">
@@ -64,5 +72,6 @@
 
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/response.js"></script>
 	</body>
 </html>

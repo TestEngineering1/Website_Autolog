@@ -1,0 +1,99 @@
+html {
+	height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+		height: 100%;
+}
+
+.navbar-header {
+    display: flex;
+    width: 100%;
+}
+
+.navbar-header .brand {
+    max-width: 60%;
+}
+
+.navbar-text {
+    font-size: 300%;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.main-content-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content-form .input-group, .main-content-form .btn-group {
+    width: 94%;
+}
+
+.main-content-form .input-group {
+    margin: 5px;
+}
+
+.main-content-form .btn-group {
+    margin: 15px;
+}
+
+.input-group-addon {
+    min-width: 6ch;
+}
+
+.response {
+	display: flex;
+	flex-direction: column;
+	align-items: center;;
+}
+
+.response-success, .response-error {
+	font-size: 3em;
+}
+
+.footer {
+    background-color: #282a2b;
+
+    width: 100%;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-around;
+
+    width: 100%;
+}
+
+.footer .text-muted {
+    color: #8C8989;
+    margin: 10px;
+}
+
+.footer .dl-link {
+    color: #BFBFBF;
+}
+
+@media (max-width: 360px) {
+    .navbar-header .brand {
+        display: none;
+    }
+
+		.navbar-text {
+		    font-size: 250%;
+		}
+
+		.
+}
+
+@media (max-width: 230px) {
+	.navbar-text {
+			font-size: 200%;
+	}
+}
